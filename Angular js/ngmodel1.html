@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="Mymodule">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>ng model</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.6/angular.js">
+  </script>
+  <script src="C:\Users\hp\Desktop\HTML\Angular js\mg-model1.js">
+  </script>
+  <style>
+  .my-input {
+    transition:all linear 0.5s;
+    background: transparent;
+  }
+  .my-input.ng-invalid {
+    color:white;
+    background: red;
+  }
+</style>
+</head>
+<body>
+  
+<!-- The ngModel directive binds an input,select, textarea (or custom form control)
+to a property on the scope using NgModelController,
+which is created and exposed by this directive. -->
+<div ng-controller="mycontroller">
+  <input type="text" ng-model="Message"/>
+  <br/>
+    <br/>
+  <span> {{ Message }} </span>
+    <br/>
+  <br/>
+   <!-- model  bydefault created   -->
+  <input type="text" ng-model="greeting"/>
+  <br/>
+  <br/>
+  <span> {{ greeting }} </span>
+
+
+  <input ng-model="val" ng-pattern="/^\d+$/" name="anim" class="my-input"
+         aria-describedby="inputDescription" />
+</div>
+</body>
+</html>

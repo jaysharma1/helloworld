@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="Mymodule">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>NG-REPEAT</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.6/angular.js">
+  </script>
+  <script src="C:\Users\hp\Desktop\HTML\Angular js\ng-repeat2.js">
+  </script>
+</head>
+<body ng-controller="mycontroller">
+<ul>
+  <li ng-repeat="country in countires">
+    {{country.Name}}
+    <ul>
+      <li ng-repeat="city in country.cities">
+          {{city.Name}}
+      </li>
+    </ul>
+  </li>
+</ul>
+<br/>
+<br/>
+<!-- index -->
+-- index --
+<ul>
+  <li ng-repeat="country in countires">
+    {{country.Name}} -index of country {{$index}}
+    <ul>
+      <li ng-repeat="city in country.cities">
+          {{city.Name}} index of city {{$index}} -index of country {{$parent.$index}}
+      </li>
+    </ul>
+  </li>
+</ul>
+<br/>
+<br/>
+<!-- using  ng-init -->
+-- using  ng-init --
+<ul>
+  <li ng-repeat="country in countires" ng-init="parentindex=$index">
+    {{country.Name}} -index of country {{parentindex}}
+    <ul>
+      <li ng-repeat="city in country.cities">
+          {{city.Name}} index of city {{$index}} -index of country {{parentindex}}
+      </li>
+    </ul>
+  </li>
+</ul>
+</body>
+</html>

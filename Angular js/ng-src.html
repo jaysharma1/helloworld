@@ -1,0 +1,48 @@
+<!doctype html>
+<html ng-app="MyModule">
+<head>
+  <title>
+    image -src
+  </title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.6/angular.js">
+  </script>
+  <script src="C:\Users\hp\Desktop\HTML\Angular js\imga.js">
+  </script>
+</head>
+<body>
+  <!-- ngSrc
+  - directive in module ng
+  Using Angular markup like {{hash}}
+   in a src attribute doesn't work right:
+    The browser will fetch from the URL with the literal text {{hash}}
+     until Angular replaces the expression inside {{hash}}.
+      The ngSrc directive solves this problem.
+      The buggy way to write it:
+
+      <img src="http://www.gravatar.com/avatar/{{hash}}" alt="Description"/>
+      The correct way to write it:
+
+      <img ng-src="http://www.gravatar.com/avatar/{{hash}}" alt="Description" />
+
+     -->
+    <div ng-controller="mycontroller">
+      <img src="C:\Users\hp\Desktop\HTML\Home - Army Portal_files\message_board_1.jpg" alt="img" style="hight:200px; width:300px;"/>
+<div>
+  Name : {{country.Name}}
+</div>
+<div>
+  capital: {{country.capital}}
+</div>
+<div>
+  <!-- ERR_FILE_NOT_FOUND -->
+    <!-- <img src="{{country.src}}" alt="{{country.alt}}" style="hight:200px; width:300px;"/> -->
+ <!-- so  we are  using  the  ng-src rather then
+ src  attribute as soon as  dom is parse  img
+  src  find  till  that time  angulr  its
+  parsing the why img display its mading two
+   request  before  evalute the  anaglur that that binding expression evalute  the  image  is  loaded withpoiut any problem   -->
+<img ng-src="{{country.src}}" alt="{{country.alt}}" style="hight:200px; width:300px;"/>
+</div>
+    </div>
+</body>
+</html>

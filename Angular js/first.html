@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html ng-app>
+<head>
+<title>Simple app</title>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.6/angular.js">
+</script>
+</head>
+<body>
+
+  <!-- ngApp
+- directive in module ng
+Use this directive to auto-bootstrap an AngularJS application.
+The ngApp directive designates the root element of
+the application and is typically placed near the root element of the page - e.g.
+on the <body> or <html> tags. -->
+<div>
+<input ng-model="name" type="text" placeholder="Your name">
+<h1>Hello {{ name }}</h1>
+</div>
+<div>
+  <h2>
+      example of arthimatic expression</h2> <br/>
+  10+20 ={{ 10 +20 }}
+</div>
+<div>
+  <h2>  example of equal expression </h2> <br/>
+  equal  ={{ 1==2 }}
+</div>
+
+<div>
+    <h2>  example of javascript object </h2> <br/>
+  Name ={{ {name:"david", age:"30"}.name }}
+</div>
+<div>
+  <h2>  name of the  last element in array :</h2> {{['jay','sagar','susmita'][2]}}
+</div>
+</body>
+</html>

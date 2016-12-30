@@ -1,0 +1,486 @@
+// FUNCTION - *** Print log message ***
+function LogMessage(message) { 
+  var isShow = true;
+  if (isShow) {
+    console.log(message);
+  }
+}
+
+/* --------------------------------------------------------------------- */
+// Added on 2 Dec 2016 - Alert Tape on Main Homepage
+// function checkAlertTapeCookie_loadPage() {
+//   var objects = $("[id^='CheckIfClosedPreviously_ID']");
+//   objects.each(function() {
+//     var element = this;
+//     checkAlertTapeCookie(element);
+//   });
+// }
+// function checkAlertTapeCookie(element) {
+//   var id = element.id;
+//   var isExisting = getAlertTapeCookie(id); // getAlertTapeCookie("CheckIfClosedPreviously_ID");
+//   if (isExisting) {
+//     // $("#" + id).css("display", "none");
+//     $("#" + id).remove();
+//   } else {
+//     $("#" + id).css("display", "block");
+//   }
+// }
+// function close_AlertTapeCookie(element) {
+//   var id = element.id;
+//   if (id != "" && id != null) {
+//     setAlertTapeCookie(id, "closed", 365);
+//     // setAlertTapeCookie("CheckIfClosedPreviously_ID", "closed", 365);
+//   }
+// }
+// function setAlertTapeCookie(cname, cvalue, extdays) {
+//   var d = new Date();
+//   d.setTime(d.getTime() + (extdays*24*60*60*1000));
+//   var expires = "expires="+d.toUTCString();
+//   document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+// }
+// function getAlertTapeCookie(cname) {
+//   var name = cname + "=";
+//   var ca = document.cookie.split(';');
+//   for(var i = 0; i < ca.length; i++) {
+//     var c = ca[i];
+//     while (c.charAt(0) == ' ') {
+//       c = c.substring(1);
+//     }
+//     if (c.indexOf(name) == 0) {
+//       return c.substring(name.length, c.length);
+//     }
+//   }
+//   return "";
+// }
+/* --------------------------------------------------------------------- */
+
+// Make the height of all selected elements exactly equal - requires jquery.matchHeight.min.js
+function MatchHeight() {
+  $('.match-height').matchHeight();  // requires jquery.matchHeight.min.js
+  $('.match-height2').matchHeight();  // requires jquery.matchHeight.min.js
+  $('.match-height3').matchHeight();  // requires jquery.matchHeight.min.js
+}
+
+// Scroll back to the top of the page smoothly 
+function BackToTop() {
+  // Hide #back-top first
+  $("#back-top").hide();
+  // Fade in #back-top
+  $(window).scroll(function () {
+    if ($(this).scrollTop() > 100) {
+      $("#back-top").fadeIn();
+    } else {
+      $("#back-top").fadeOut();
+    }
+  });
+  // Scroll body to 0px on click
+  $("#back-top a").click(function () {
+    $("body,html").animate({
+      scrollTop: 0
+    }, 800);
+    return false;
+  });
+}
+
+// Smooth Page Scroll for eApps Page - Anchor Tags
+function EnablePageScrollForApps() {
+  $('.MyFavAnchorTagGroup a[href*="#"]:not([href="#"])').click(function() {
+    if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+      var target = $(this.hash);
+      target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+      if (target.length) {
+        $('html, body').animate({
+          scrollTop: (target.offset().top - 106)  // scrollTop: target.offset().top
+        }, 800);
+        return false;
+      }
+    }
+  });
+}
+// Exclusive for comment section in some pages - Anchor Tags (Reposition anchor tags)
+$(document).ready(function() {
+  var elements = $("body").find(".CommentSectionAnchorTag");
+  if (elements.length > 0) {
+    clearTimeout($.data(this, 'resizeTimer'));
+    $.data(this, 'resizeTimer', setTimeout(function() {
+      var currentURLHash = location.hash;
+      var target = $(currentURLHash);
+      LogMessage(target);
+      if (target.length) {
+        $('html, body').animate({
+          scrollTop: (target.offset().top - 106)  // scrollTop: target.offset().top
+        }, 10);
+        return false;
+      }
+    }, 100));
+  }
+});
+
+// Mobile Navigation Menu
+function openMobileNav() {
+  document.getElementById("mobileNavSideBarID").style.width = "270px";
+  $("#mobileNavSideBarID").css("height", "");  // Clear inline css first
+  $("#mobileNavSideBarID").css("height", $("#mobileNavSideBarID").height() + "px");
+}
+function closeMobileNav() {
+  document.getElementById("mobileNavSideBarID").style.width = "0";
+  $("#mobileNavSideBarID").css("height", "");  // Clear inline css first
+}
+function toggleMobileNav() {
+  if ($("#mobileNavSideBarID").width() == 0) {
+    document.getElementById("mobileNavSideBarID").style.width = "270px";
+    $("#mobileNavSideBarID").css("height", "");  // Clear inline css first
+    $("#mobileNavSideBarID").css("height", $("#mobileNavSideBarID").height() + "px");
+  } else {
+    document.getElementById("mobileNavSideBarID").style.width = "0";
+    $("#mobileNavSideBarID").css("height", "");  // Clear inline css first
+  }
+}
+
+function FixHeadingLine(classname) {
+  var affectedElements = $(classname);
+  affectedElements.each(function() {
+    // Clear CSS inline height first before doing the process (during resize)
+    $(this).find(".box_allview_wrapper").css("display", "");
+    $(this).css("display", "");
+
+    // Check if yellow and grey lines are not on the same position at initial or during resize, hide grey line
+    var headingHeight = $(this).find(".box_title_heading").height();
+    var allviewHeight = $(this).find(".box_allview_wrapper").height();
+    // LogMessage(classname + " -- " + headingHeight + " " + allviewHeight);
+    if (headingHeight != allviewHeight) {
+      $(this).find(".box_allview_wrapper").css("display", "none");
+      // $(this).css("display", "inline-block");
+      $(this).css("display", "inline-table");
+    } else {
+      $(this).find(".box_allview_wrapper").css("display", "block");
+      $(this).css("display", "");
+    }
+  });
+}
+
+function CalculateFluid() {
+  var leftpanelWidth = 0;
+  var rightpanelWidth = 0;
+  var contentWidth = 0;
+  var doTakeAction = false;
+
+  var fluid_leftpanel = $(".fluid_leftpanel");
+  var fluid_rightpanel = $(".fluid_rightpanel");
+  var fluid_content = $(".fluid_content");
+  fluid_leftpanel.css("width", "");
+  fluid_rightpanel.css("width", "");
+  fluid_content.css("width", "");
+  
+  // Due to max width 1920px of container fluid in mindef_style.css [Modified on 1 Dec 2016]
+  var screenWidth = $(".container-fluid").outerWidth();
+  // var screenWidth = $(document).width();
+
+  if (screenWidth > 1199) { // at least 1200px
+    if (fluid_leftpanel.length > 0) { leftpanelWidth = fluid_leftpanel.outerWidth(); }
+    if (fluid_rightpanel.length > 0) { rightpanelWidth = fluid_rightpanel.outerWidth(); }
+    doTakeAction = true;
+  } else if (screenWidth > 991) { // 992px - 1199px
+    if (fluid_leftpanel.length > 0) { leftpanelWidth = fluid_leftpanel.outerWidth();  }
+    if (fluid_rightpanel.length > 0) { rightpanelWidth = fluid_rightpanel.outerWidth(); }
+    doTakeAction = true;
+  } else if (screenWidth > 767) { // 768px - 992px
+    doTakeAction = false;
+  } else { // 991px & below
+    doTakeAction = false;
+  }
+
+  if (doTakeAction) {
+    // contentWidth = screenWidth - leftpanelWidth - rightpanelWidth;
+    contentWidth = screenWidth - leftpanelWidth - rightpanelWidth - 10;  // minus 10px compensates .container-fluid padding left/right 20px
+    fluid_leftpanel.css("width", leftpanelWidth + "px");
+    fluid_rightpanel.css("width", rightpanelWidth + "px");
+    fluid_content.css("width", contentWidth + "px");
+    // LogMessage("leftpanel " + leftpanelWidth + " rightpanel " + rightpanelWidth + " content " + contentWidth + " window " + screenWidth);
+  } else {
+    fluid_leftpanel.css("width", "");
+    fluid_rightpanel.css("width", "");
+    fluid_content.css("width", "");
+  }
+}
+
+// Army Portal - Message Board
+function ResizeMessageBoard_ArmyPortal() {
+  var width = $(".messageboardcarouselbox").width();
+  var screenWidth = $(".messageboardcarouselbox .messageboard_items_slider_for").width();
+  var sliderWidth = $(".messageboardcarouselbox .messageboard_items_navslider").width();
+  var result = width - sliderWidth;
+  $(".messageboardcarouselbox .messageboard_items_slider_for").css("width", result + "px");
+}
+
+// Universal Navigation - Bookmarks
+$(document).ready(function() {
+
+  // USER INPUT: Click to remove all bookmark links
+  // $("#E_Bookmarks .mobilebookmarksbox .removetoggleall").click(function(event) {
+  //   if ($(this).hasClass("checked")) {
+  //     $(this).removeClass("checked");
+  //     $("#E_Bookmarks .mobilebookmarksbox .bookmarklink .ballotbox").removeClass("checked");
+  //   } else {
+  //     $(this).addClass("checked");
+  //     $("#E_Bookmarks .mobilebookmarksbox .bookmarklink .ballotbox").addClass("checked");
+  //   }
+  // });
+
+  // USER INPUT: Click 'cross' bookmark links
+  $(document).on("click", "#E_Bookmarks .mobilebookmarksbox .bookmarklink .ballotbox", function(event) {
+    if ($(this).hasClass("checked")) {
+      $(this).removeClass("checked");
+    } else {
+      $(this).addClass("checked");
+    }
+  });
+
+  // USER INPUT: Remove bookmark links
+  $(document).on("click", "#E_Bookmarks .mobilebookmarksbox .remove", function(event) { 
+    var count = 0;
+    var message = "";
+    var listingArray = [];
+    var bookmarklinks = $("#E_Bookmarks .mobilebookmarksbox .bookmarklink");
+    bookmarklinks.each(function() {
+      var node = $(this).find(".ballotbox");
+      if (node.hasClass("checked")) {
+        count++;
+        listingArray.push($(this));
+      }
+    });
+
+    if (count == 0) {
+      alert("No bookmark is selected.");
+    } else if (count == 1) {
+      message = "Do you confirm to remove 1 selected bookmark now?";
+    } else {
+      message = "Do you confirm to remove " + count + " selected bookmarks now?";
+    }
+
+    if (count > 0) {
+      if (confirm(message) == true) {
+        var i;
+        var len = listingArray.length;
+        for (i = 0; i < len; i++) {
+          listingArray[i].remove();
+        }
+      }
+    }
+  });
+
+  // USER INPUT: Add bookmarks link
+  $(document).on("click", "#E_Bookmarks .mobilebookmarksbox .add", function(event) { 
+    var title = $(document).find("title").text();
+    var isExisting = false;
+
+    var bookmarklinks = $("#E_Bookmarks .mobilebookmarksbox .bookmarklink");
+    bookmarklinks.each(function() {
+      var val = $(this).find("a").text();
+      if (val == title) {
+        isExisting = true;
+        return false;
+      }
+    });
+
+    if (!isExisting) {
+      var appendString = "<li class=\"bookmarklink\"><div class=\"title\"><a>" + title + "</a></div><div class=\"ballotbox\"></div></li>";
+      $("#E_Bookmarks .mobilebookmarksbox ul").append(appendString);
+    }
+  });
+
+});
+
+
+// Universal Navigation - Search Bar
+$(document).ready(function() {
+  $("#C_Search_Desktop .searchbox .choice").click(function(event) {
+    var caret = "<i class=\"fa fa-caret-down\" aria-hidden=\"true\"></i>";
+    var selected = $(this).parent().text() + " " + caret;
+    $("#C_Search_Desktop .searchmenudisplay").html(selected);
+
+    var width, width2, total = 0;
+    width = $("#C_Search_Desktop .searchbox .dropdown").innerWidth();
+    width2 = $("#C_Search_Desktop .searchbox .btn.btn-default").innerWidth();
+    total = width + width2;
+    $("#C_Search_Desktop .searchbox").css("margin-right", total + "px");
+  });   
+});
+
+
+// Document Library / Wiki Library -- Popup Viewing Box
+$(document).ready(function() {
+  // Click '...' ellipsis to open popup view box
+  $(".openpopup").click(function(event) {
+    $(".openpopup").not($(this)).parent().find(".popupbox").css("display", "none"); // close the rest
+    $(this).parent().find(".popupbox").css("display", "block"); // open current one
+    var top = (($(this).parent().find(".popupbox").outerHeight() / 2) + 10) * -1;  // adjust the position
+    $(this).parent().find(".popupbox").css("top", top + "px");
+  });
+
+  // Click 'X' close icon to close popup view box
+  $(".popupbox .closeicon").click(function(event) {
+    $(this).parent().css("display", "none");  // close current one
+  });
+});
+
+
+$(document).ready(function() {
+
+  // Mobile Navigation Menu
+  var sidenavacc = $(".sidenav_accordion");
+  var i;
+  for (i = 0; i < sidenavacc.length; i++) {
+    sidenavacc[i].onclick = function() {
+      if ($(this).hasClass("active")) {
+        $(this).removeClass("active");
+      } else {
+        $(this).addClass("active");
+      }
+      if ($(this).next().hasClass("show")) {
+        $(this).next().removeClass("show");
+      } else {
+        $(this).next().addClass("show");
+      }
+    }
+  }
+  
+  // ------------------------------------------------------------------------------------------------
+  // For real tablet touch on main navigation menu
+  var prevString = "";
+  var isMatched = false;
+  var prevNode = null;
+  // $("#isTouch1, #isTouch2, #isTouch3, #isTouch4, #isTouch5, #isTouch6").on("click touchend", function(e) {
+  $("[id^='isTouch']").on("click touchend", function(e) {
+    if (e.type == "touchend") {
+      e.preventDefault(); // Prevent main navigation menu first level menu links from following the URL
+
+      if (prevString == "") {
+        prevString = $(this).attr("id");
+      } else if (prevString == $(this).attr("id")) {
+        isMatched = true;
+      } else {
+        isMatched = false;
+      }
+      // LogMessage($(this).attr("id"));
+      // LogMessage($(this).parent().attr("class"));
+      // LogMessage($(this).parent().children(":nth-child(2)").attr("class"));
+
+      // for touched tablet only, check if matched
+      if (isMatched == true) {
+        if (prevNode == null) {
+          // LogMessage("MATCHED & CLOSE");
+          if ($(this).parent().children(":first").attr("class").toLowerCase().indexOf("active") < 0) {
+            $(this).parent().children(":first").css("color", "#FFF"); // .css("color", "#777");
+          }
+          $(this).parent().children(":nth-child(2)").hide();
+        }
+
+        if ((prevNode).parent().children(":nth-child(2)").css("display") == "none") {
+          // LogMessage("MATCHED & OPEN");
+          prevNode.parent().children(":first").css("color", "#FFF"); //css("color", "#333");
+          prevNode.parent().children(":nth-child(2)").show();
+        } else {
+          // LogMessage("MATCHED & CLOSE");
+          if (prevNode.parent().children(":first").attr("class").toLowerCase().indexOf("active") < 0) {
+            prevNode.parent().children(":first").css("color", "#FFF"); // .css("color", "#777");
+          }
+          prevNode.parent().children(":nth-child(2)").hide();
+        }
+      } else {
+        // LogMessage("NOT MATCHED");
+        prevString = $(this).attr("id");
+        $(this).parent().children(":first").css("color", "#FFF"); //css("color", "#333");
+        $(this).parent().children(":nth-child(2)").show();
+
+        if (prevNode != null) {
+          if (prevNode.parent().children(":first").attr("class").toLowerCase().indexOf("active") < 0) {
+            prevNode.parent().children(":first").css("color", "#FFF"); // .css("color", "#777");
+          }
+          prevNode.parent().children(":nth-child(2)").hide();
+        }
+        prevNode = $(this);
+      }
+      // LogMessage("-------------");
+    }
+  });
+  $(document).on("touchstart", function (event) {
+    if (!$(event.target).closest('#NavigationBar').length) {
+      $("#NavigationBar .dropdown-menu").hide();
+      $("#NavigationBar .dropdown .dropdown-toggle").not(".active").css("color", "#FFF"); // .css("color", "#777");
+    }
+  });
+  // ------------------------------------------------------------------------------------------------
+
+  
+ 
+  /* ====================================================================== */
+  $(function() {
+    MatchHeight();
+  });
+
+  BackToTop();  // Scroll back to the top of the page smoothly
+  EnablePageScrollForApps();  // Smooth Page Scroll for eApps Page - Anchor Tags
+  ResizeMessageBoard_ArmyPortal();
+
+  // For MAIN CONTENT HEADING, check if yellow and grey lines are not on the same position during resize, hide grey line
+  FixHeadingLine(".maincontent_heading");
+  FixHeadingLine(".rightsidebar_heading");
+
+  CalculateFluid();
+  MatchHeight();  // Fired twice at the last
+  LogMessage("jQuery READY");
+  
+  /* ====================================================================== */
+
+  // clearTimeout($.data(this, 'resizeTimer'));
+  // $.data(this, 'resizeTimer', setTimeout(function() {
+  //  // Do here...
+  //  LogMessage("jQuery setTimeout 200");
+  // }, 200));
+
+});
+
+
+// // If the mobile/tablet device is rotated vertically or horizontally, trigger the orientationchange event to do processes
+// $(window).on("orientationchange", function() {
+//  if(window.orientation == 0) { // Portrait
+//    // Do here ...
+//    clearTimeout($.data(this, 'resizeTimer'));
+//    $.data(this, 'resizeTimer', setTimeout(function() {
+//      // Do here ...
+//    }, 200));
+//  } else {  // Landscape
+//    // Do here ...
+//    clearTimeout($.data(this, 'resizeTimer'));
+//    $.data(this, 'resizeTimer', setTimeout(function() {
+//      // Do here ...
+//    }, 200));
+//  }
+// });
+
+
+// If the browser screen is resized, do processes
+$(window).resize(function() {
+  /* ====================================================================== */
+  
+  MatchHeight();
+  // Clear inline CSS style first here ...
+  // console.clear();
+
+  ResizeMessageBoard_ArmyPortal();
+
+  // For MAIN CONTENT HEADING, check if yellow and grey lines are not on the same position during resize, hide grey line
+  FixHeadingLine(".maincontent_heading");
+  FixHeadingLine(".rightsidebar_heading");
+
+  CalculateFluid();
+  LogMessage("jQuery RESIZE");
+  
+  /* ====================================================================== */
+
+  // clearTimeout($.data(this, 'resizeTimer'));
+  // $.data(this, 'resizeTimer', setTimeout(function() {
+  //  // Codes here
+  // }, 200));
+});

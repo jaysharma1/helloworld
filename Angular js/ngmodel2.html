@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="Mymodule">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>mg-model2</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.6/angular.js">
+  </script>
+  <script src="C:\Users\hp\Desktop\HTML\Angular js\ng-model2.js">
+  </script>
+</head>
+<body>
+
+<div ng-controller="mycontroller">
+  <table>
+    <tr>
+      <td>
+Name
+      </td>
+      <td>
+  <input type="text" ng-model="employee.Name">
+      </td>
+    </tr>
+        <tr>
+      <td>
+AGE:
+      </td>
+      <td>
+  <input type="text" ng-model="employee.AGE">
+      </td>
+    </tr>
+        <tr>
+      <td>
+GENDER:
+      </td>
+      <td>
+  <input type="text" ng-model="employee.GENDER">
+      </td>
+    </tr>
+  </table>
+  <BR/>
+  <BR/>
+  <table>
+    <tr>
+      <td>
+Name
+      </td>
+      <td>
+{{employee.Name}}
+      </td>
+    </tr>
+        <tr>
+      <td>
+AGE:
+      </td>
+      <td>
+{{employee.AGE}}
+      </td>
+    </tr>
+        <tr>
+      <td>
+GENDER:
+      </td>
+      <td>
+  {{employee.GENDER}}
+      </td>
+    </tr>
+  </table>
+</div>
+</body>
+</html>

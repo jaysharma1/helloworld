@@ -1,0 +1,56 @@
+<html>
+<head>
+<style>
+.styleclass{
+display:table-cell;
+border:1px solid black;
+padding:20px;
+text-align:center;
+}
+</style>
+</head>
+
+<body>
+<H2> first exam</h2>
+<div  class="styleclass" onclick="alert('div clicked')" > div elememt
+<span class="styleclass" onclick="alert('span clicked')" > span elememt
+<input type="Button" value="click me" onclick="alert('input clicked')" />
+</span>
+</div>
+
+<h2> second EXAM </h2>
+<div  class="styleclass" onclick="alert('div clicked')" > div elememt
+<span class="styleclass"> span elememt
+<input type="Button" value="click me"  />
+</span>
+</div>
+
+<h2> third exam</h2>
+<div class="styleclass" id ="div1"> div1
+<div class="styleclass" id ="div2"> div2
+<div class="styleclass" id ="div3"> div3
+<div>
+<div>
+
+<div>
+<script type="text/javascript">
+var divElemnts= document.getElementsByTagName('div')
+for  ( var  i= 0 ;  i < divElemnts.length;  i++)
+{
+ divElemnts[i].onclick = function (e) {
+ e= e || window.event; // window.event  for  ie8  for fcomplablitkles issuse
+//  for   stop event  bubbliing 
+ if  (e.stopPropagation)
+ e.stopPropagation()
+ else
+ e.cancelBubble= true
+ 
+ this.style.borderColor='red';
+ alert(this.getAttribute('id')+ "_element ");
+ 
+ }
+}
+</script>
+</body>
+
+</html>

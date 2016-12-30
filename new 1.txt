@@ -1,0 +1,22 @@
+<html>
+<head>
+this is  us for  
+<script type="text/javascript" src="/_layout/15/sp.runtime.js"/>
+<script type="text/javascript" src="/_layout/15/sp.js"/>
+</head>
+<body>
+<input type="text" id="txtTitle"/>
+<input type="text" id="txtDescription"/>
+<input type="Button" value="Read Web Properties" onclick="ReadWebProperites" />
+
+<script type="text/javascript">
+function ReadWebProperites()
+{
+var ctx=SP.ClientContext.get_current();
+this.web= ctx.get_web();
+ctx.load(this.web,"Title","Description");
+ctx.excuteQueryAsync(function.createDelegate(this, this.onsu)
+}
+</script>
+</body>
+</html>
